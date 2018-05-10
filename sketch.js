@@ -84,7 +84,7 @@ function draw()
 
 }
 
-function touchStarted()
+function mousePressed()
 {
     if ( mouseButton === LEFT )
     {
@@ -121,9 +121,9 @@ function touchStarted()
     }
 
 
-
-
 }
+
+
 
 function mouseMoved()
 {
@@ -137,4 +137,33 @@ function touchMoved()
     angle = map( mouseY, height / 2, height, 0, 90 );
     ab = map( mouseX, 0, windowWidth, -45, 45 );
 
+}
+
+function touchStarted()
+{
+    if ( maxLevel <= flowerLevel )
+    {
+        maxLevel++;
+    }
+    else
+    {
+        let dropedFlowercount = 0;
+        while ( dropedFlowercount < round( ( flowers.length - dropedFlower.length ) / 6 ) )
+        {
+            for ( let floweri of flowers )
+            {
+                if ( round( random( 0, 10 ) ) % 3 == 0 )
+                {
+                    if ( dropedFlowerId.includes( floweri.id ) )
+                    {
+                        continue;
+                    }
+                    dropedFlower.push( floweri );
+                    dropedFlowerId.push( floweri.id );
+                    dropedFlowercount++;
+
+                }
+            }
+        }
+    }
 }
